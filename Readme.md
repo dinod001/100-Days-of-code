@@ -2,7 +2,7 @@
 
 This repository contains my daily progress, projects, and notes for the  **100 Days of Code Program by Eminent Brands** .
 
-The program is designed to build strong foundations in JavaScript, TypeScript, MERN, Python, Data Science, and Machine Learning.
+The program is designed to build strong foundations in JavaScript, TypeScript, MERN, Python,Machine Learning and Data Science.
 
 ---
 
