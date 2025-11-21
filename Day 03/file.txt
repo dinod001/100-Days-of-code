@@ -1,0 +1,4 @@
+Day 3 – JavaScript deep dive: scopes, closures, execution context. 
+Challenge: Build examples demonstrating closure behavior. 
+
+Task Completed ✅
