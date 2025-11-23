@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Todo App</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    
+        .container {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+    
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+        }
+    
+        #input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+    
+        #input:focus {
+            border-color: #6c5ce7;
+            outline: none;
+            box-shadow: 0 0 5px rgba(108, 92, 231, 0.4);
+        }
+    
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-right: 5px;
+            transition: 0.3s;
+        }
+    
+        #addBtn {
+            background: #6c5ce7;
+            color: #fff;
+        }
+    
+        #addBtn:hover {
+            background: #574bcb;
+        }
+    
+        #deleteBtn {
+            background: #d63031;
+            color: white;
+        }
+    
+        #deleteBtn:hover {
+            background: #c0392b;
+        }
+    
+        #list {
+            margin-top: 20px;
+            padding-left: 20px;
+            color: #2d3436;
+            font-size: 18px;
+        }
+    
+        #list li {
+            margin: 6px 0;
+            padding: 6px 10px;
+            background: #f1f2f6;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+    
+        #list li:hover {
+            background: #dfe6e9;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Todo List</h2>
+        <input id="input" placeholder="Enter the task: " />
+        <button id="addBtn">Add</button>
+        <button id="deleteBtn">Delete</button>
+        <ol id="list"></ol>
+    </div>
+
+    <script src="simple_todo.js"></script>
+</body>
+
+</html>
