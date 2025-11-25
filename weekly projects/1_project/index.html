@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Profile Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(30, 30, 46, 0.6);
+      --bg-card-hover: rgba(40, 40, 56, 0.8);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b8;
+      --border-glow: rgba(99, 102, 241, 0.5);
+    }
+
+    /* Body & Background */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background Elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 50%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+      animation: float 15s ease-in-out infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.1); }
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* Title with 3D Effect */
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+      transform: perspective(1000px) rotateX(5deg);
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5)); }
+      50% { filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.8)); }
+    }
+
+    /* Search Bar with 3D Glass Effect */
+    .search-bar {
+      display: flex;
+      margin-bottom: 10px;
+      perspective: 1000px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .search-wrapper {
+      display: flex;
+      width: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+    }
+
+    .search-wrapper:hover {
+      transform: translateY(-2px) rotateX(2deg);
+    }
+
+    input#username {
+      flex: 1;
+      padding: 18px 24px;
+      border: 2px solid transparent;
+      border-radius: 16px 0 0 16px;
+      outline: none;
+      font-size: 16px;
+      background: rgba(30, 30, 46, 0.4);
+      backdrop-filter: blur(20px);
+      color: var(--text-primary);
+      border-right: 1px solid rgba(99, 102, 241, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    input#username:focus {
+      background: rgba(40, 40, 56, 0.6);
+      border-color: var(--primary);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 4px rgba(99, 102, 241, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transform: translateZ(10px);
+    }
+
+    input#username::placeholder {
+      color: var(--text-secondary);
+    }
+
+    button#search {
+      padding: 18px 32px;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border-radius: 0 16px 16px 0;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 8px 32px rgba(99, 102, 241, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button#search::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    button#search:hover {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
+      transform: translateY(-2px) translateZ(10px);
+      box-shadow: 
+        0 12px 40px rgba(99, 102, 241, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    button#search:hover::before {
+      left: 100%;
+    }
+
+    button#search:active {
+      transform: translateY(0) translateZ(5px);
+    }
+
+    /* Profile Card with 3D Effect */
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      background: rgba(30, 30, 46, 0.4);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      width: 100%;
+      max-width: 800px;
+      transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-8px) rotateX(2deg);
+      box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(99, 102, 241, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .profile-card:hover::before {
+      opacity: 1;
+    }
+
+    #image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+      background-clip: padding-box;
+      padding: 3px;
+      object-fit: cover;
+      box-shadow: 
+        0 10px 40px rgba(99, 102, 241, 0.4),
+        0 0 20px rgba(99, 102, 241, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+
+    .profile-card:hover #image {
+      transform: scale(1.1) rotateY(10deg);
+      box-shadow: 
+        0 15px 50px rgba(99, 102, 241, 0.6),
+        0 0 30px rgba(99, 102, 241, 0.3);
+    }
+
+    #profile {
+      list-style: none;
+      flex: 1;
+    }
+
+    #profile li {
+      padding: 12px 0;
+      font-size: 16px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #profile li:last-child {
+      border-bottom: none;
+    }
+
+    #profile li:hover {
+      color: var(--text-primary);
+      transform: translateX(5px);
+      text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+    }
+
+    #profile li::before {
+      content: '▸';
+      color: var(--primary);
+      font-size: 12px;
+      transition: transform 0.3s;
+    }
+
+    #profile li:hover::before {
+      transform: translateX(5px);
+    }
+
+    /* Repos Section */
+    .repos-container {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      padding-left: 10px;
+      text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    }
+
+    #repos {
+      list-style: none;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      perspective: 1000px;
+    }
+
+    #repos li {
+      padding: 20px;
+      background: rgba(30, 30, 46, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    #repos li::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    #repos li:hover {
+      background: rgba(40, 40, 56, 0.6);
+      transform: translateY(-8px) rotateX(5deg) translateZ(20px);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 
+        0 16px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(99, 102, 241, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    #repos li:hover::before {
+      left: 100%;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .search-bar {
+        max-width: 100%;
+      }
+
+      input#username {
+        padding: 16px 20px;
+        font-size: 14px;
+      }
+
+      button#search {
+        padding: 16px 24px;
+        font-size: 14px;
+      }
+
+      .profile-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      #image {
+        width: 120px;
+        height: 120px;
+      }
+
+      #repos {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      input#username {
+        width: 100%;
+        border-radius: 16px;
+        border-right: 2px solid transparent;
+      }
+
+      button#search {
+        width: 100%;
+        border-radius: 16px;
+        margin-top: 10px;
+      }
+
+      .search-wrapper {
+        flex-direction: column;
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .loading {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GitHub Profile Explorer</h1>
+
+    <div class="search-bar">
+      <div class="search-wrapper">
+        <input id="username" type="text" placeholder="Enter GitHub username">
+        <button id="search">Search</button>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <img src="" alt="GitHub Avatar" id="image" style="display: none;">
+      <ul id="profile"></ul>
+    </div>
+
+    <div class="repos-container">
+      <div class="section-title">Repositories</div>
+      <ul id="repos"></ul>
+    </div>
+  </div>
+
+  <!-- External JS -->
+  <script src="script.js"></script>
+</body>
+</html>
