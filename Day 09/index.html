@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="city" placeholder="Enter city name">
+            <button id="getWeather">Search</button>
+        </div>
+
+        <div class="weather-info" id="weatherInfo">
+            <div class="left-panel">
+                <div class="location-box">
+                    <div class="city" id="cityName">New York, US</div>
+                    <div class="date" id="localTime">Monday, 12:00 PM</div>
+                </div>
+
+                <div class="current-weather">
+                    <div class="temp-box">
+                        <div class="temp" id="temp">25°C</div>
+                    </div>
+                    <img src="" alt="Weather Icon" class="weather-icon" id="weatherIcon">
+                    <div class="condition" id="condition">Sunny</div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <span class="detail-label">Humidity</span>
+                        <span class="detail-value" id="humidity">45%</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="detail-label">Wind Speed</span>
+                        <span class="detail-value" id="windSpeed">12 km/h</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="detail-label">Feels Like</span>
+                        <span class="detail-value" id="feelsLike">27°C</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="detail-label">Wind Dir</span>
+                        <span class="detail-value" id="windDir">NW</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
