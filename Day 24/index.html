@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Helper Toolkit - Master Data Structures & Algorithms</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="gradient-text">DSA Helper Toolkit</span>
+                </h1>
+                <p class="subtitle">Master Data Structures & Algorithms Interactively</p>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab active" data-category="data-structures">
+                <span class="tab-icon">📊</span>
+                Data Structures
+            </button>
+            <button class="tab" data-category="algorithms">
+                <span class="tab-icon">⚡</span>
+                Algorithms
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Data Structures Section -->
+            <section id="data-structures" class="category-section active">
+                <div class="cards-grid">
+                    <!-- Stack Card -->
+                    <div class="card" data-structure="stack">
+                        <div class="card-header">
+                            <h3>Stack</h3>
+                            <span class="badge">LIFO</span>
+                        </div>
+                        <p class="card-description">Last In First Out data structure</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Enter value" class="input" id="stack-input">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="stackPush()">Push</button>
+                                <button class="btn btn-secondary" onclick="stackPop()">Pop</button>
+                                <button class="btn btn-tertiary" onclick="stackPeek()">Peek</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="stack-viz"></div>
+                        <div class="output" id="stack-output"></div>
+                    </div>
+
+                    <!-- Queue Card -->
+                    <div class="card" data-structure="queue">
+                        <div class="card-header">
+                            <h3>Queue</h3>
+                            <span class="badge">FIFO</span>
+                        </div>
+                        <p class="card-description">First In First Out data structure</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Enter value" class="input" id="queue-input">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="queueEnqueue()">Enqueue</button>
+                                <button class="btn btn-secondary" onclick="queueDequeue()">Dequeue</button>
+                                <button class="btn btn-tertiary" onclick="queueFront()">Front</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="queue-viz"></div>
+                        <div class="output" id="queue-output"></div>
+                    </div>
+
+                    <!-- Linked List Card -->
+                    <div class="card" data-structure="linkedlist">
+                        <div class="card-header">
+                            <h3>Linked List</h3>
+                            <span class="badge">Dynamic</span>
+                        </div>
+                        <p class="card-description">Sequential data structure with nodes</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Enter value" class="input" id="list-input">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="listAppend()">Append</button>
+                                <button class="btn btn-secondary" onclick="listPrepend()">Prepend</button>
+                                <button class="btn btn-tertiary" onclick="listReverse()">Reverse</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="list-viz"></div>
+                        <div class="output" id="list-output"></div>
+                    </div>
+
+                    <!-- Binary Search Tree Card -->
+                    <div class="card" data-structure="bst">
+                        <div class="card-header">
+                            <h3>Binary Search Tree</h3>
+                            <span class="badge">Sorted</span>
+                        </div>
+                        <p class="card-description">Hierarchical sorted data structure</p>
+                        <div class="controls">
+                            <input type="number" placeholder="Enter number" class="input" id="bst-input">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="bstInsert()">Insert</button>
+                                <button class="btn btn-secondary" onclick="bstInorder()">Inorder</button>
+                                <button class="btn btn-tertiary" onclick="bstSearch()">Search</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="bst-viz"></div>
+                        <div class="output" id="bst-output"></div>
+                    </div>
+
+                    <!-- Graph Card -->
+                    <div class="card" data-structure="graph">
+                        <div class="card-header">
+                            <h3>Graph</h3>
+                            <span class="badge">Network</span>
+                        </div>
+                        <p class="card-description">Vertices connected by edges</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Vertex (e.g., A)" class="input" id="graph-vertex">
+                            <input type="text" placeholder="Connect to (e.g., B)" class="input" id="graph-edge">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="graphAddVertex()">Add Vertex</button>
+                                <button class="btn btn-secondary" onclick="graphAddEdge()">Add Edge</button>
+                                <button class="btn btn-tertiary" onclick="graphBFS()">BFS</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="graph-viz"></div>
+                        <div class="output" id="graph-output"></div>
+                    </div>
+
+                    <!-- HashMap Card -->
+                    <div class="card" data-structure="hashmap">
+                        <div class="card-header">
+                            <h3>Hash Map</h3>
+                            <span class="badge">O(1)</span>
+                        </div>
+                        <p class="card-description">Key-value pairs with fast lookup</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Key" class="input" id="hash-key">
+                            <input type="text" placeholder="Value" class="input" id="hash-value">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="hashSet()">Set</button>
+                                <button class="btn btn-secondary" onclick="hashGet()">Get</button>
+                                <button class="btn btn-tertiary" onclick="hashKeys()">Keys</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="hash-viz"></div>
+                        <div class="output" id="hash-output"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Algorithms Section -->
+            <section id="algorithms" class="category-section">
+                <div class="cards-grid">
+                    <!-- Sorting Algorithms Card -->
+                    <div class="card algorithm-card">
+                        <div class="card-header">
+                            <h3>Sorting Algorithms</h3>
+                            <span class="badge">O(n log n)</span>
+                        </div>
+                        <p class="card-description">Arrange elements in order</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Enter numbers (e.g., 5,3,8,1,9)" class="input"
+                                id="sort-input">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="runBubbleSort()">Bubble Sort</button>
+                                <button class="btn btn-secondary" onclick="runQuickSort()">Quick Sort</button>
+                                <button class="btn btn-tertiary" onclick="runMergeSort()">Merge Sort</button>
+                            </div>
+                        </div>
+                        <div class="visualization bars-viz" id="sort-viz"></div>
+                        <div class="output" id="sort-output"></div>
+                    </div>
+
+                    <!-- Searching Algorithms Card -->
+                    <div class="card algorithm-card">
+                        <div class="card-header">
+                            <h3>Searching Algorithms</h3>
+                            <span class="badge">O(log n)</span>
+                        </div>
+                        <p class="card-description">Find elements efficiently</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Array (e.g., 1,3,5,7,9)" class="input" id="search-array">
+                            <input type="number" placeholder="Target value" class="input" id="search-target">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="runLinearSearch()">Linear Search</button>
+                                <button class="btn btn-secondary" onclick="runBinarySearch()">Binary Search</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="search-viz"></div>
+                        <div class="output" id="search-output"></div>
+                    </div>
+
+                    <!-- Graph Traversal Card -->
+                    <div class="card algorithm-card">
+                        <div class="card-header">
+                            <h3>Graph Traversal</h3>
+                            <span class="badge">BFS/DFS</span>
+                        </div>
+                        <p class="card-description">Explore all vertices systematically</p>
+                        <div class="controls">
+                            <input type="text" placeholder="Start vertex" class="input" id="traversal-start">
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="runBFS()">BFS Traversal</button>
+                                <button class="btn btn-secondary" onclick="runDFS()">DFS Traversal</button>
+                            </div>
+                        </div>
+                        <div class="visualization" id="traversal-viz"></div>
+                        <div class="output" id="traversal-output"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with ❤️ for learning DSA | Day 24 - 100 Days of Code</p>
+        </footer>
+    </div>
+
+    <script src="dataStructures.js"></script>
+    <script src="algorithms.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
